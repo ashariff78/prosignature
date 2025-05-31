@@ -3,7 +3,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req: NextRequest) {
   try {
-    const { priceId } = await req.json();
+    const { priceId, userEmail } = await req.json();
 
     // Define prices
     const prices: { [key: string]: string } = {
@@ -24,8 +24,12 @@ export async function POST(req: NextRequest) {
       cancel_url: `${req.headers.get('origin')}/pricing`,
       allow_promotion_codes: true,
       subscription_data: {
-        trial_period_days: 7,  // MOVED HERE - correct place for trials
+        trial_period_days: 7,
       },
+      customer_email: userEmail, // Pre-fill email if user is logged in
+      metadata: {
+        priceId: priceId
+      }
     });
 
     return NextResponse.json({ url: session.url });
