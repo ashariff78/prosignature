@@ -9,6 +9,7 @@ export async function POST(req: NextRequest) {
     const prices: { [key: string]: string } = {
       'pro': 'price_1RUcg5HDoGJQiibUcAckeM8H',
       'team': 'price_1RUch6HDoGJQiibU6NLqIdCm',
+      'lifetime': 'price_1RVIVzHDoGJQiibU6oLmqGrH',
     };
 
     const session = await stripe.checkout.sessions.create({

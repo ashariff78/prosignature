@@ -11,16 +11,7 @@ export default function Footer() {
               <h4 className="text-white font-semibold mb-3">Product</h4>
               <ul className="space-y-2 text-sm">
                 <li><a href="/pricing" className="hover:text-white">Pricing</a></li>
-                <li><a href="/templates" className="hover:text-white">Templates</a></li>
                 <li><a href="/blog" className="hover:text-white">Blog</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-semibold mb-3">Support</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="/help" className="hover:text-white">Help Center</a></li>
-                <li><a href="/contact" className="hover:text-white">Contact</a></li>
-                <li><a href="/privacy" className="hover:text-white">Privacy</a></li>
               </ul>
             </div>
             <div>
