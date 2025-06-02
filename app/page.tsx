@@ -10,6 +10,16 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      {/* Promotional Banner */}
+      <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-center py-3 sticky top-0 z-50">
+        <p className="font-semibold">
+          🔥 LIMITED TIME: Get Lifetime Pro Access for $49 (normally $108/year) 
+          <a href="/lifetime-deal" className="underline ml-2 hover:text-yellow-200">
+            Claim Now →
+          </a>
+        </p>
+      </div>
+
       {/* Navigation */}
       <nav className="bg-white shadow-sm">
         <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
