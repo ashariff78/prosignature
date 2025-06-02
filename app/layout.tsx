@@ -21,6 +21,9 @@ export const metadata = {
     title: 'ProSignature - Professional Email Signatures in 30 Seconds',
     description: 'Create beautiful email signatures instantly. Works with Gmail, Outlook, and more.',
     url: 'https://prosignature.app',
+  },
+  icons: {
+    icon: '/favicon.ico',
   }
 };
 
