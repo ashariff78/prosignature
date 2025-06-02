@@ -15,6 +15,32 @@ export default function SignatureBuilder() {
   const [selectedTemplate, setSelectedTemplate] = useState('modern');
   const [copied, setCopied] = useState(false);
 
+  // AI Suggestion function
+  const getAISuggestions = (jobTitle: string, company: string) => {
+    const suggestions = {
+      'marketing': 'Consider adding a link to your latest case study or marketing guide to showcase expertise',
+      'sales': 'Add a calendar booking link like Calendly to make it easy for prospects to schedule calls',
+      'developer': 'Include a link to your GitHub or portfolio to showcase your coding projects',
+      'consultant': 'Add a "Book a free consultation" link to generate leads from every email',
+      'designer': 'Include a portfolio link to showcase your creative work and attract clients',
+      'manager': 'Consider adding your LinkedIn profile to build professional connections',
+      'ceo': 'Add a company blog or press kit link to establish thought leadership',
+      'freelancer': 'Include a "Hire me" or portfolio link to convert emails into business',
+      'default': 'Pro tip: Adding a professional headshot increases email response rates by 32%'
+    }
+    
+    const key = jobTitle.toLowerCase().includes('marketing') ? 'marketing' :
+               jobTitle.toLowerCase().includes('sales') ? 'sales' :
+               jobTitle.toLowerCase().includes('developer') || jobTitle.toLowerCase().includes('engineer') ? 'developer' :
+               jobTitle.toLowerCase().includes('consultant') ? 'consultant' :
+               jobTitle.toLowerCase().includes('designer') ? 'designer' :
+               jobTitle.toLowerCase().includes('manager') ? 'manager' :
+               jobTitle.toLowerCase().includes('ceo') || jobTitle.toLowerCase().includes('founder') ? 'ceo' :
+               jobTitle.toLowerCase().includes('freelancer') ? 'freelancer' : 'default'
+    
+    return suggestions[key]
+  }
+
   const copyToClipboard = () => {
     // Create the HTML signature
     let signatureHTML = '';
@@ -150,6 +176,22 @@ export default function SignatureBuilder() {
             onChange={(e) => setFormData({...formData, linkedin: e.target.value})}
           />
 
+          {/* AI Suggestions Box */}
+          {formData.title && (
+            <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-lg p-4 mt-6">
+              <h4 className="font-semibold text-purple-800 mb-2 flex items-center">
+                <span className="mr-2">🤖</span>
+                AI-Powered Suggestion
+              </h4>
+              <p className="text-purple-700 text-sm leading-relaxed">
+                {getAISuggestions(formData.title, formData.company)}
+              </p>
+              <div className="mt-2 text-xs text-purple-600">
+                ✨ Powered by ProSignature AI
+              </div>
+            </div>
+          )}
+
           <div className="mt-6">
             <h3 className="font-semibold mb-3">Choose Template:</h3>
             <div className="space-y-2">
@@ -202,15 +244,18 @@ export default function SignatureBuilder() {
                 <tbody>
                   <tr>
                     <td style={{paddingRight: '15px', borderRight: '2px solid #e5e7eb'}}>
-                      {/* ... rest of the content ... */}
+                      <div style={{fontWeight: 'bold', fontSize: '16px', color: '#1f2937'}}>{formData.name || 'Your Name'}</div>
+                      <div style={{color: '#2563eb', fontSize: '14px'}}>{formData.title || 'Your Title'}</div>
+                      <div style={{color: '#6b7280', fontSize: '14px'}}>{formData.company || 'Your Company'}</div>
                     </td>
                     <td style={{paddingLeft: '15px', fontSize: '13px'}}>
-                      {/* ... rest of the content ... */}
+                      {formData.email && <div style={{marginBottom: '4px'}}><a href={`mailto:${formData.email}`} style={{color: '#4b5563', textDecoration: 'none'}}>{formData.email}</a></div>}
+                      {formData.phone && <div style={{marginBottom: '4px'}}><a href={`tel:${formData.phone}`} style={{color: '#4b5563', textDecoration: 'none'}}>{formData.phone}</a></div>}
+                      {formData.website && <div><a href={formData.website} style={{color: '#2563eb', textDecoration: 'none'}}>{formData.website}</a></div>}
                     </td>
                   </tr>
                 </tbody>
               </table>
-
             )}
           </div>
           
